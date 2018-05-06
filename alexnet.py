@@ -93,6 +93,7 @@ class AlexNet(object):
         """Load weights from file into network.
 
         As the weights from http://www.cs.toronto.edu/~guerzhoy/tf_alexnet/
+        
         come as a dict of lists (e.g. weights['conv1'] is a list) and not as
         dict of dicts (e.g. weights['conv1'] is a dict with keys 'weights' &
         'biases') we need a special load function
@@ -104,7 +105,10 @@ class AlexNet(object):
         for op_name in weights_dict:
 
             # Check if layer should be trained from scratch
-            if op_name not in self.SKIP_LAYER:
+            
+            if not self.SKIP_LAYER and not (op_name == 'fc8'):
+            
+            # if op_name not in self.SKIP_LAYER:
 
                 with tf.variable_scope(op_name, reuse=True):
 

@@ -106,7 +106,7 @@ class AlexNet(object):
 
             # Check if layer should be trained from scratch
             
-            if not self.SKIP_LAYER and not (op_name == 'fc8'):
+            if not self.SKIP_LAYER and not (op_name in ['fc6', 'fc7', 'fc8']):
             
             # if op_name not in self.SKIP_LAYER:
 

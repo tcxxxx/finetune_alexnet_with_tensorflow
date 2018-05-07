@@ -145,7 +145,9 @@ def conv(x, filter_height, filter_width, num_filters, stride_y, stride_x, name,
         weights = tf.get_variable('weights', shape=[filter_height,
                                                     filter_width,
                                                     input_channels/groups,
-                                                    num_filters])
+                                                    num_filters], \
+                                                    initializer=tf.contrib.layers.xavier_initializer())
+
         biases = tf.get_variable('biases', shape=[num_filters])
 
     if groups == 1:
@@ -177,7 +179,8 @@ def fc(x, num_in, num_out, name, relu=True):
 
         # Create tf variables for the weights and biases
         weights = tf.get_variable('weights', shape=[num_in, num_out],
-                                  trainable=True)
+                                  trainable=True, 
+                                  initializer=tf.contrib.layers.xavier_initializer())
         biases = tf.get_variable('biases', [num_out], trainable=True)
 
         # Matrix multiply weights and inputs and add bias
